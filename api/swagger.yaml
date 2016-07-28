@@ -1,0 +1,32 @@
+---
+swagger: "2.0"
+info:
+  version: "0.0.0"
+  title: "Test Store"
+paths:
+  /persons:
+    get:
+      description: "Gets `Person` objects.\nOptional query param of **size** determines\n\
+        size of returned array\n"
+      operationId: "personsGET"
+      parameters:
+      - name: "testName"
+        in: "query"
+        description: "Test description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/inline_response_200"
+      x-swagger-router-controller: "Default"
+definitions:
+  inline_response_200:
+    properties:
+      single:
+        type: "boolean"
+      name:
+        type: "string"

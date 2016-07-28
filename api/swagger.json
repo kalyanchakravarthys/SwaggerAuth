@@ -1,0 +1,170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.0",
+    "title": "Test Store",
+    "description": "All crud operations for the test store",
+    "version": "1.0.0"
+  },
+  "securityDefinitions": {
+        "tokenAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+  "paths": {
+    "/test": {
+      "get": {
+        "description": "Gets test data.",
+        "operationId": "testGET",
+        "parameters": [
+          {
+            "name": "testName",
+            "in": "query",
+            "description": "Test",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security":[{
+                  "tokenAuth": []
+                  }],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/inline_response_testGET"
+              }
+            }
+          }
+        },
+        "x-swagger-router-controller": "User"
+      }
+    },
+    "/user/login/{loginId}": {
+      "post": {
+                "description": "User authentication",
+                "operationId": "userLoginPOST",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                      "name": "loginId",
+                      "in": "path",
+                      "description": "User Id",
+                      "required": true,
+                      "type": "string"
+                    },
+                    {
+                        "name": "userDetails",
+                        "in": "body",
+                        "description": "User login details",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/inline_request_userLoginPOST"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Login",
+                        "schema": {
+                            "$ref": "#/definitions/inline_response_testGET"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                },
+                "x-swagger-router-controller": "User"
+            }
+    },
+    "/user/logout": {
+      "post": {
+                "description": "Logs out a logged in user",
+                "operationId": "userLogoutPOST",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Logout",
+                        "schema": {
+                            "$ref": "#/definitions/inline_response_testGET"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/errorModel"
+                        }
+                    }
+                },
+                "x-swagger-router-controller": "User"
+            }
+    }
+  },
+  "definitions": {
+    "errorModel":{
+      "properties":{
+        "id": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "inline_response_testGET": {
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "inline_request_userDetailsPUT": {
+            "type": "object",
+            "required": [
+                "password", "email"
+            ],
+            "properties": {
+                "userName": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "isActive": {
+                    "type": "boolean"
+                }
+            }
+        },
+    "inline_request_userLoginPOST": {
+            "type": "object",
+            "required": [
+                "password"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+  }
+}
