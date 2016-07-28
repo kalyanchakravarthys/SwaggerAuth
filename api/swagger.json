@@ -16,7 +16,7 @@
   "paths": {
     "/test": {
       "get": {
-        "description": "Gets test data.",
+        "description": "Gets test data. This api works only after authentication.",
         "operationId": "testGET",
         "parameters": [
           {
@@ -46,7 +46,7 @@
     },
     "/user/login/{loginId}": {
       "post": {
-                "description": "User authentication",
+                "description": "User authentication. userId = kalyan, password = password",
                 "operationId": "userLoginPOST",
                 "produces": [
                     "application/json"
